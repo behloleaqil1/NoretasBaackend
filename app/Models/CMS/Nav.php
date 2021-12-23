@@ -10,9 +10,4 @@ class Nav extends Model
     protected $guarded = [
         'id'
     ];
-
-    public function getSingleNav($id)
-    {
-        return self::find($id);
-    }
 }

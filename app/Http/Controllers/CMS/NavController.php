@@ -4,15 +4,25 @@ namespace App\Http\Controllers\CMS;
 
 use App\Http\Controllers\Controller;
 use App\Models\CMS\Nav;
-use http\Env\Request;
+use Illuminate\Http\Request;
 
 class NavController extends Controller
 {
 
     public function getSingleNav($id)
     {
-        $data = (new \App\Models\CMS\Nav)->getSingleNav($id);
+        $data = Nav::find($id);
         if ($data)
+            return $this->successResponse($data
+                , 'Data Fetched Successfully');
+        else
+            return $this->errorResponse('No Record Found', null);
+    }
+
+    public function index()
+    {
+        $data = Nav::all();
+        if ($data->count() != 0)
             return $this->successResponse($data
                 , 'Data Fetched Successfully');
         else
@@ -22,13 +32,13 @@ class NavController extends Controller
     public function createNav(Request $request)
     {
         $this->validateNavRequest($request);
-        $this->saveOrUpdateNav($request, 0);
+        return $this->saveOrUpdateNav($request);
 
     }
 
     public function updateNav(Request $request, $id)
     {
-        $this->validateNavRequest($request, $id);
+        return $this->saveOrUpdateNav($request, $id);
 
 
     }
@@ -37,9 +47,6 @@ class NavController extends Controller
     {
         $this->validate($request, [
             'text' => 'required',
-            'url' => 'required',
-            'is_collapsable' => 'required',
-            'parent_id' => 'required',
         ]);
     }
 

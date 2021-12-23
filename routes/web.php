@@ -16,3 +16,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->group(['prefix' => 'nav'], function () use ($router) {
+    $router->get('/', 'CMS\NavController@index');
+    $router->post('/', 'CMS\NavController@createNav');
+});
