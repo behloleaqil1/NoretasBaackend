@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 /**
  * Models
  */
@@ -9,6 +10,8 @@ const {NavMenus} = require('./Modules/CMS/Models/Navbar');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+app.use(express.static('public'));
 /**
  *  Routes
  */
@@ -28,5 +31,6 @@ mongoose.connect('mongodb+srv://behlole:a5121472z@cluster0.qkdpg.mongodb.net/Nor
     .catch((e) => {
         console.log("Database connection failed...", e.message);
     });
+
 
 app.listen(port, console.log(`Server running at ${port}`));

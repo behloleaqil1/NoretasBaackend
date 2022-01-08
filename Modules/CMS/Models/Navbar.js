@@ -5,7 +5,9 @@ const navSchema = new mongoose.Schema({
         type: String,
     },
     parent_id: String,
-    is_parent:Boolean,
+    is_parent: Boolean,
+    url: String,
+    children: Array,
 
 });
 
