@@ -3,6 +3,8 @@ const {FeaturedCard} = require('../Models/FeaturedCard');
 const {RightFeaturedCard} = require('../Models/RightFeaturedCard');
 const {EventServices} = require('../Models/EventServices');
 const {Client} = require('../Models/Client');
+const {ContactForm} = require('../Models/ContactForm');
+const {AboutUsSection} = require('../Models/AboutUsSection');
 
 module.exports = {
     indexNav: async (req, res) => {
@@ -22,6 +24,14 @@ module.exports = {
         let right_featured_cards = await RightFeaturedCard.findOne({});
         res.json({data: right_featured_cards, message: 'Right Featured Cards Fetched Successfully', success: true})
 
+    },
+    indexContactForm: async (req, res) => {
+        let contact_form = await ContactForm.findOne({});
+        res.json({data: contact_form, message: 'Contact Forms Fetched Successfully', success: true})
+    },
+    indexAboutUsSections: async (req, res) => {
+        let about_us_sections = await AboutUsSection.find({});
+        res.json({data: about_us_sections, message: 'About Us Sections Fetched Successfully', success: true});
     },
     indexEventServices: async (req, res) => {
         let event_services = {
@@ -61,6 +71,14 @@ module.exports = {
     createClients: async (req, res) => {
         let clients = await Client.create(req.body);
         res.json({data: clients, message: 'Clients Created Successfully', success: true})
+    },
+    createContactForm: async (req, res) => {
+        let contact = await ContactForm.create(req.body);
+        res.json({data: contact, message: 'We Will Contact you shortly', success: true})
+    },
+    createAboutUsSections: async (req, res) => {
+        let about_us_sections = await AboutUsSection.create(req.body);
+        res.json({data: about_us_sections, message: 'About Us Sections Fetched Successfully', success: true});
     },
     update: async () => {
         /**
